@@ -1,9 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
-  
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const NoteApp());
 }
 
@@ -105,7 +110,6 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     } catch (e) {
       _showSnackBar("Connection Failed. Is Python running?", Colors.red);
-      print(e);
     }
   }
 
